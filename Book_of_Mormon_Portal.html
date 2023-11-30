@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
+<style>
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Nunito'; font-size: 22px;
+}
+body{
+  overflow-y: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #5372F0;
+}
+a{ color:#000; }
+.wrapper{
+  width: 605px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 24px 30px 5px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+.wrapper header{
+  user-select: none;
+  font-size: 35px;
+  font-weight: 600;
+  text-align: center;
+}
+.wrapper .content{
+  margin: 20px 0;
+}
+.content .quote-area{
+  display: flex;
+  justify-content: center;
+}
+.quote{
+  font-size: 22px;
+  text-align: center;
+  word-wrap: normal;
+}
+.content .reference{
+  display: flex;
+  font-size: 18px;
+  margin-top: 14px;
+  font-style: italic;
+  justify-content: flex-end;
+}
+.reference span:first-child{
+  margin: -7px 5px 0 0;
+  font-family: monospace;
+}
+.buttons{
+  overflow-x: hidden;
+  overflow-y: auto;
+  user-select: none;
+}
+div.scroll {
+  margin: 0px, 0px;
+  padding: 10px 5px;
+  width: 545px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+::-webkit-scrollbar {
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 8px;
+  cursor: pointer !important;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+button{
+  user-select: none;
+  margin-top: 20px;
+  padding: 12px 22px;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 30px;
+  background: #5372F0;
+  opacity: 0.8;
+  transition: 0.5s;
+}
+button:hover {
+  opacity: 1;
+}
+</style>
+<html>
+  <head>
+    <title>Book of Mormon Verses</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>Book of Mormon Verse</header>
+      <div class="content">
+        <div class="quote-area">
+          <span class="quote" id='quote'>Welcome. This is an interactive study tool for the Book of Mormon. This project was inspired by the 'Questions of the Soul' found in Preach my Gospel. Select a button below to study choice passages by topic</span>
+        </div>
+        <div class="reference">
+          <span></span>
+          <a id='reference' class="name" target="_blank" rel="noopener" href="https://www.churchofjesuschrist.org/study/scriptures/bofm?lang=eng">Book of Mormon on lds.org</a>
+        </div>
+        <button id='⮜' style='float:left;'>⮜</button>
+        <button id='⮞' style='float:right;'>⮞</button>
+      </div>
+      <div class="buttons scroll">
+        <button class='b' style='background: #5372F0;' id='Random'>Random</button>
+        <button class='b' style='background: #52BE80;' id='Joy'>Joy</button>
+        <button class='b' style='background: darkCyan;' id='Strength'>Strength</button>
+        <button class='b' style='background: coral;' id='Love'>Love</button>
+        <button class='b' style='background: #A569BD;' id='Hope'>Hope</button>
+        <button class='b' style='background: orange;' id='Direction'>Direction</button>
+        <button class='b' style='background: #5DADE2;' id='Peace'>Peace</button>
+        <button class='b' style='background: #EC7063 ;' id='Scriptures'>Scriptures</button>
+        <button class='b' style='background: #F4D03F;' id='Prayer'>Prayer</button>
+        <button class='b' style='background: #CCCCFF;' id='Commandments'>Commandments</button>
+      </div>
+    </div>
+    <script>
+    let VerseN = 0;
+    let Verses = [
+    {d:"And thus we see that the commandments of God must be fulfilled. And if it so be that the children of men keep the commandments of God he doth nourish them, and strengthen them, and provide means whereby they can accomplish the thing which he has commanded them; wherefore, he did provide means for us while we did sojourn in the wilderness.", r:'1 Nephi 17:3', t:'Hope Direction Commandments'},
+    {d:"And I will also be your light in the wilderness; and I will prepare the way before you, if it so be that ye shall keep my commandments; wherefore, inasmuch as ye shall keep my commandments ye shall be led towards the promised land; and ye shall know that it is by me that ye are led.", r:'1 Nephi 17:13', t:'Commandments'},
+    {d:"He doeth not anything save it be for the benefit of the world; for he loveth the world, even that he layeth down his own life that he may draw all men unto him. Wherefore, he commandeth none that they shall not partake of his salvation.",r:'2 Nephi 26:24',t:'Love'},
+    {d:"Believe in God… And behold, I say unto you that if ye do this ye shall always rejoice, and be filled with the love of God, and always retain a remission of your sins; and ye shall grow in the knowledge of the glory of him that created you, or in the knowledge of that which is just and true.", r:'Mosiah 4:9,12', t:'Faith Joy'},
+    {d:"And it came to pass that after I had prayed and labored with all diligence, the Lord said unto me: I will grant unto thee according to thy desires, because of thy faith.",r:'Enos 1:12',t:'Prayer'},
+    {d:"Yea, come unto Christ, and be perfected in him, and deny yourselves of all ungodliness; and if ye shall deny yourselves of all ungodliness, and love God with all your might, mind and strength, then is his grace sufficient for you, that by his grace ye may be perfect in Christ; and if by the grace of God ye are perfect in Christ, ye can in nowise deny the power of God.", r:'Mosiah 10:32', t:'Joy'},
+    {d:"Adam fell that men might be; and men are, that they might have joy.",r:'2 Nephi 2:25',t:'Joy Direction'},
+    {d:"For behold, this life is the time for men to prepare to meet God; yea, behold the day of this life is the day for men to perform their labors.",r:'Alma 34:32',t:'Direction'},
+    {d:"And moreover, I would desire that ye should consider on the blessed and happy state of those that keep the commandments of God. For behold, they are blessed in all things, both temporal and spiritual; and if they hold out faithful to the end they are received into heaven, that thereby they may dwell with God in a state of never-ending happiness. O remember, remember that these things are true; for the Lord God hath spoken it.",r:'Mosiah 2:41',t:'Joy Commandments'},
+    {d:"If thou wilt repent of all thy sins, and will bow down before God, and call on his name in faith, believing that ye shall receive, then shalt thou receive the hope which thou desirest",r:'Alma 22:16',t:'Hope Prayer'},
+    {d:"And I will also ease the burdens which are put upon your shoulders, that even you cannot feel them upon your backs, even while you are in bondage; and this will I do that ye may stand as witnesses for me hereafter, and that ye may know of a surety that I, the Lord God, do visit my people in their afflictions.",r:'Mosiah 24:14',t:'Hope Peace Strength'},
+    {d:"And it came to pass that the voice of the Lord came to them in their afflictions, saying: Lift up your heads and be of good comfort, for I know of the covenant which ye have made unto me…[and] the burdens which were laid upon Alma and his brethren were made light; yea, the Lord did strengthen them that they could bear up their burdens with ease, and they did submit cheerfully and with patience to all the will of the Lord. ",r:'Mosiah 24:13,15',t:'Hope Strength'},
+    {d:"Peace, peace be unto you, because of your faith in my Well Beloved, who was from the foundation of the world.",r:'Helaman 5:47',t:'Peace'},
+    {d:"And now, my sons, remember, remember that it is upon the rock of our Redeemer, who is Christ, the Son of God, that ye must build your foundation; that when the devil shall send forth his mighty winds, yea, his shafts in the whirlwind, yea, when all his hail and his mighty storm shall beat upon you, it shall have no power over you to drag you down to the gulf of misery and endless wo, because of the rock upon which ye are built, which is a sure foundation, a foundation whereon if men build they cannot fall.",r:'Helaman 5:12',t:'Strength Direction'},  
+    {d:"Wherefore, I said unto you, feast upon the words of Christ; for behold, the words of Christ will tell you all things what ye should do.",r:'2 Nephi 32:3',t:'Direction Scriptures'},
+    {d:"But behold, I say unto you that ye must pray always, and not faint; that ye must not perform any thing unto the Lord save in the first place ye shall pray unto the Father in the name of Christ, that he will consecrate thy performance unto thee, that thy performance may be for the welfare of thy soul.",r:'2 Nephi 32:9',t:'Prayer Direction'},  
+    {d:"And he shall go forth, suffering pains and afflictions and temptations of every kind; and this that the word might be fulfilled which saith he will take upon him the pains and the sicknesses of his people. And he will take upon him death, that he may loose the bands of death which bind his people; and he will take upon him their infirmities, that his bowels may be filled with mercy, according to the flesh, that he may know according to the flesh how to succor his people according to their infirmities.",r:'Alma 7:11-12',t:'Strength Joy Love'},
+    {d:"Now my son, I would that ye should repent and forsake your sins, and go no more after the lusts of your eyes, but cross yourself in all these things; for except ye do this ye can in nowise inherit the kingdom of God. Oh, remember, and take it upon you, and cross yourself in these things.",r:'Alma 39:9',t:'Direction'},
+    {d:"For, for this intent have we written these things, that they may know that we knew of Christ, and we had a hope of his glory many hundred years before his coming; and not only we ourselves had a hope of his glory, but also all the holy prophets which were before us.",r:'Jacob 4:4',t:'Love Scriptures'},
+    {d:"For we labor diligently to write, to persuade our children, and also our brethren, to believe in Christ, and to be reconciled to God; for we know that it is by grace that we are saved... we believe in Christ, we keep the law of Moses, and look forward with steadfastness unto Christ, until the law shall be fulfilled... And we talk of Christ, we rejoice in Christ, we preach of Christ, we prophecy of Christ, and we write according to our prophecies, that our children may know to what source they may look for a remission of their sins.",r:'2 Nephi 25:23-24',t:'Scriptures Direction Joy'},
+    {d:"Knowest thou the condescension of God? And I said unto him: I know that he loveth his children; nevertheless, I do not know the meaning of all things.",r:'1 Nephi 11:16-17',t:'Direction'},
+    {d:"And upon these I write the things of my soul, and many of the scriptures which are engraven upon the plates of brass. For my soul delighteth in the scriptures, and my heart pondereth them, and writeth them for the learning and the profit of my children.",r:'2 Nephi 4:15',t:'Scriptures'},
+    {d:"I would that ye should remember that these sayings are true, and also that these records are true. And now, my sons, I would that ye should remember to search them diligently, that ye may profit thereby; and I would that ye should keep the commandments of God, that ye may prosper in the land according to the promises which the Lord made unto our fathers.",r:'Mosiah 1:6-7',t:'Scriptures Commandments'},
+    {d:"Use boldness, but not overbearance; and also see that you bridle all your passions, that ye may be filled with love; see that ye refrain from idleness.",r:'Alma 38:12',t:'Direction'},
+    {d:"And it came to pass that I was three days and three nights in the most bitter pain and anguish of soul; and never, until I did cry out unto the Lord Jesus Christ for mercy, did I receive a remission of my sins. But behold, I did cry unto him and I did find peace to my soul.",r:'Alma 38:8',t:'Peace Prayer'},
+    {d:"O be wise; what can I say more?",r:'Jacob 6:12',t:'Direction'},
+    {d:"And again I would exhort you that ye would come unto Christ, and lay hold upon every good gift, and touch not the evil gift, nor the unclean thing. Yea, come unto Christ, and be perfected in him...",r:'Moroni 10:30,32',t:'Love Joy Hope'},
+    {d:"Wherefore, whoso believeth in God might with surety hope for a better world, yea, even a place at the right hand of God, which hope cometh of faith, maketh an anchor to the souls of men, which would make them sure and steadfast.",r:'Ether 12:4',t:'Joy Hope'},
+    {d:"And if men come unto me I will show unto them their weakness. I give unto men weakness that they may be humble; and my grace is sufficient for all men that humble themselves before me; for if they humble themselves before me, and have faith in me, then will I make weak things become strong unto them.",r:'Ether 12:27',t:'Strength Direction'},
+    {d:"Bear one another's burdens, that they may be light; ...mourn with those that mourn; yea, and comfort those that stand in need of comfort, and to stand as witnesses of God at all times and in all things, and in all places that ye may be in, even until death, that ye may be redeemed of God, and be numbered with those of the first resurrection, that ye may have eternal life.",r:'Mosiah 18:8-9',t:'Strength Direction Commandments'},
+    {d:"Know ye not that ye are in the hands of God? Know ye not that he hath all power, and at his great command the earth shall be rolled together as a scroll?",r:'Mormon 5:23',t:'Strength'},
+    {d:"And again, my beloved brethren, I would speak unto you concerning hope. How is it that ye can attain unto faith, save ye shall have hope? And what is it that ye shall hope for? Behold I say unto you that ye shall have hope through the atonement of Christ and the power of his resurrection, to be raised unto life eternal, and this because of your faith in him according to the promise.",r:'Moroni 7:40-41',t:'Hope'},
+    {d:"Yea, and when you do not cry unto the Lord, let your hearts be full, drawn out in prayer unto him continually for your welfare, and also for the welfare of those who are around you.",r:'Alma 34:27',t:'Prayer'},
+    {d:"Now, the decrees of God are unalterable; therefore, the way is prepared that whosoever will may walk therein and be saved. And now behold, my son, do not risk aone more offense against your God upon those points of doctrine, which ye have hitherto risked to commit sin. Do not suppose, because it has been spoken concerning restoration, that ye shall be restored from sin to happiness. Behold, I say unto you, wickedness never was happiness.",r:'Alma 41:8-10',t:'Direction'},
+    {d:"They all cried aloud with one voice, saying: O have mercy, and apply the atoning blood of Christ that we may receive forgiveness of our sins, and our hearts may be purified; for we believe in Jesus Christ, the Son of God... after they had spoken these words the Spirit of the Lord came upon them, and they were filled with joy, having received a remission of their sins, and having peace of conscience, because of the exceeding faith which they had in Jesus Christ who should come.",r:'Mosiah 2:3-4',t:'Peace Love Joy'},
+    {d:"And why should I yield to sin, because of my flesh? Yea, why should I give way to temptations, that the evil one have place in my heart to destroy my peace and afflict my soul? Why am I angry because of mine enemy? Awake, my soul! No longer droop in sin. Rejoice, O my heart, and give place no more for the enemy of my soul.",r:'2 Nephi 4:27-28',t:'Direction Peace'},
+    {d:"Rejoice, O my heart, and cry unto the Lord, and say: O Lord, I will praise thee forever; yea, my soul will rejoice in thee, my God, and the rock of my salvation.",r:'2 Nephi 4:30',t:'Strength'},
+    {d:"We did pour out our souls in prayer to God, that he should strengthen us and deliver us out of the hands of our enemies, yea, and also give us strength that we might retain our cities... and it came to pass that the Lord our God... did speak peace to our souls, and did grant unto us great faith, and did cause us that we should hope for our deliverance in him.",r:'Alma 58:10-11',t:'Strength Peace Prayer'},
+    {d:"Oh, how merciful is our God! [He] had mercy on us, and made these things known unto us that we might not perish; yea, and he has made these things known unto us beforehand, because he loveth our souls as well as he loveth our children; therefore, in his mercy he doth visit us by his angels, that the plan of salvation might be made known unto us as well as unto future generations.",r:'Alma 24:15,14',t:'Love'},
+    {d:"Yea, verily I say unto you, if ye will come unto me ye shall have eternal life. Behold, mine arm of mercy is extended towards you, and whosoever will come, him will I receive; and blessed are those who come unto me.",r:'3 Nephi 9:14',t:'Love'},
+    {d:"Behold, I am Jesus Christ, whom the prophets testified shall come into the world. And behold, I am the light and the life of the world; and I have drunk out of that bitter cup which the Father hath given me, and have glorified the Father in taking upon me the sins of the world, in the which I have suffered the will of the Father in all things from the beginning.",r:'3 Nephi 11:10-11',t:'Love'},
+  ];//{d:"",r:'',t:''},
+    let VerseList = [];
+    let newList = function(A){
+        let B = [];
+        VerseList = [];
+        if(A==='Random'){A='';}
+        for(let n=0; n<Verses.length; n++){
+            if(Verses[n].t.includes(String(A))){
+                VerseList.push(Verses[n]);
+                B.push(Math.random());
+            }
+        }
+        if(A===''){A='Random';}
+        for(let n=0; n<VerseList.length; n++){
+            if(B[n]>B[n+1]){
+                let C = VerseList[n+1];
+                VerseList[n+1]=VerseList[n];
+                VerseList[n]=C;
+                C = B[n+1];
+                B[n+1]=B[n];
+                B[n]=C;
+                if(n===0){n=-1;}else{n-=2;}
+            }
+        }
+        VerseN = 0;
+        if(document.getElementById("quote").innerHTML===VerseList[0].d&&VerseList.length!==0){VerseN=1;}
+        document.getElementById("quote").innerHTML = VerseList[VerseN].d;
+        document.getElementById("reference").innerHTML = VerseList[VerseN].r;
+        document.getElementById("⮞").style.background=document.getElementById(A).style.background;
+        document.getElementById("⮜").style.background=document.getElementById(A).style.background;
+        DeepLinkURL(VerseList[VerseN].r);
+    };
+    let newVerse = function(A){
+      if(VerseList.length===0){newList('Random');}
+      if(A===1){
+        if(VerseN>=VerseList.length-1){VerseN=0;}else{VerseN++;}
+      }else{
+        if(VerseN===0){VerseN=VerseList.length-1;}else{VerseN--;}
+      }
+      document.getElementById("quote").innerHTML = VerseList[VerseN].d;
+      document.getElementById("reference").innerHTML = VerseList[VerseN].r;
+      DeepLinkURL(VerseList[VerseN].r);
+    };
+    let DeepLinkURL = function(){
+      let ref = document.getElementById("reference").innerHTML; 
+      let link = "https://www.churchofjesuschrist.org/study/scriptures/bofm/";
+      let refA = String(ref).split(' ');
+      let book = refA[0];
+      if(refA.length>2){book = refA[0]+' '+refA[1];}
+      let chapter = refA[refA.length-1].split(':')[0];
+      let verse = refA[refA.length-1].split(':')[1];
+      book = (['1-ne','2-ne','jacob','enos','jarom','omni','w-of-m','mosiah','alma','hel','3-ne','4-ne','morm','ether','moro'])[['1 Nephi','2 Nephi','Jacob','Enos','Jarom','Omni','Words of Mormon','Mosiah','Alma','Helaman','3 Nephi','4 Nephi','Mormon','Ether','Moroni'].indexOf(book)];
+      let verse1 = String(verse.split('-')).split(',')[0];
+      if(verse1!==1){verse1--;}
+      link+=String(book+'/'+chapter+'?lang=eng&id='+verse+'#p'+verse1);
+      document.getElementById("reference").setAttribute("href", link); 
+    } 
+    var buttons = document.getElementsByClassName("b");
+    for (var i = 0; i < buttons.length; i++) {
+        buttons[i].setAttribute("onclick", "newList(this.innerHTML)");
+    }
+    document.getElementById("⮞").setAttribute("onclick", 'newVerse(1);');
+    document.getElementById("⮜").setAttribute("onclick", 'newVerse(-1);');
+    </script>
+  </body>
+</html>
